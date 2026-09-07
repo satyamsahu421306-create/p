@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Priya Didi ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Georgia,serif;
+    background:
+        radial-gradient(circle at 20% 20%,#8b285f,transparent 35%),
+        radial-gradient(circle at 80% 80%,#62164f,transparent 40%),
+        linear-gradient(135deg,#250b2d,#5a164e,#260b35);
+    color:white;
+    min-height:100vh;
+    overflow:hidden;
+}
+
+/* FLOATING HEARTS */
+
+#hearts{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:1;
+}
+
+.heart{
+    position:absolute;
+    bottom:-50px;
+    color:#ff9dca;
+    text-shadow:
+        0 0 8px #ff65b2,
+        0 0 20px #ff65b2;
+    animation:heartFloat linear forwards;
+}
+
+@keyframes heartFloat{
+    0%{
+        transform:translateY(0) scale(.6) rotate(0);
+        opacity:0;
+    }
+    15%{opacity:.8;}
+    100%{
+        transform:translateY(-110vh) scale(1.3) rotate(35deg);
+        opacity:0;
+    }
+}
+
+/* SCREENS */
+
+.screen{
+    position:absolute;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    padding:20px;
+    z-index:5;
+}
+
+.screen.active{
+    display:flex;
+    animation:fadeIn .8s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:scale(.96);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.small{
+    color:#ffc3df;
+    font-size:14px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:20px;
+}
+
+.title{
+    font-size:clamp(42px,9vw,80px);
+    text-align:center;
+    color:#ffd8e9;
+    text-shadow:
+        0 0 12px #ff70b5,
+        0 0 35px #ff3e9e;
+}
+
+.subtitle{
+    margin-top:20px;
+    text-align:center;
+    max-width:700px;
+    font-size:clamp(18px,4vw,27px);
+    line-height:1.6;
+    color:#ffeaf4;
+}
+
+/* BUTTON */
+
+.btn{
+    margin-top:35px;
+    padding:15px 38px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(135deg,#ff68b1,#ffb4d9);
+    color:#4a123c;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:
+        0 0 15px #ff61ad,
+        0 0 40px rgba(255,80,170,.5);
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:scale(1.08);
+}
+
+/* STORY */
+
+.story{
+    max-width:850px;
+    text-align:center;
+    font-size:clamp(24px,5vw,42px);
+    line-height:1.7;
+}
+
+.story span{
+    display:block;
+    opacity:0;
+    animation:showLine 1s forwards;
+}
+
+.story span:nth-child(1){animation-delay:.2s}
+.story span:nth-child(2){animation-delay:1.4s}
+.story span:nth-child(3){animation-delay:2.6s}
+.story span:nth-child(4){animation-delay:3.8s}
+
+@keyframes showLine{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* CALENDAR */
+
+.calendar{
+    width:min(430px,94vw);
+    padding:25px;
+    border-radius:25px;
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,200,225,.35);
+    backdrop-filter:blur(15px);
+    box-shadow:0 0 40px rgba(255,70,170,.25);
+}
+
+.month{
+    text-align:center;
+    font-size:30px;
+    margin-bottom:20px;
+    color:#ffd7e9;
+}
+
+.weekdays,
+.days{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:7px;
+    text-align:center;
+}
+
+.weekdays div{
+    font-size:12px;
+    color:#ffb5d5;
+}
+
+.days div{
+    min-height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+}
+
+.special{
+    background:#ff58a9;
+    box-shadow:
+        0 0 12px #ff67b3,
+        0 0 28px #ff67b3;
+    font-weight:bold;
+    position:relative;
+}
+
+.special::after{
+    content:"♥";
+    position:absolute;
+    top:-10px;
+    right:-2px;
+    font-size:12px;
+}
+
+.calendarMsg{
+    text-align:center;
+    margin-top:22px;
+    color:#ffd9ea;
+    font-size:17px;
+}
+
+/* AGE */
+
+.age{
+    font-size:clamp(140px,30vw,270px);
+    line-height:.8;
+    font-weight:bold;
+    color:#ffd3e8;
+    text-shadow:
+        0 0 15px #ff7fba,
+        0 0 45px #ff4ba3,
+        0 0 80px #ff3198;
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    50%{
+        transform:scale(1.06);
+    }
+}
+
+.ageText{
+    text-align:center;
+    max-width:700px;
+    font-size:23px;
+    line-height:1.7;
+    color:#ffe8f2;
+}
+
+/* FLIP CARD AREA */
+
+.flipArea{
+    width:min(440px,94vw);
+    height:min(680px,76vh);
+    perspective:1600px;
+}
+
+.flipCard{
+    width:100%;
+    height:100%;
+    position:relative;
+    cursor:pointer;
+    transform-style:preserve-3d;
+    transition:transform .9s cubic-bezier(.2,.7,.2,1);
+}
+
+.flipCard.flipped{
+    transform:rotateY(180deg);
+}
+
+.cardFace{
+    position:absolute;
+    inset:0;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,220,235,.2),
+            rgba(255,255,255,.06)
+        );
+
+    border:1px solid rgba(255,210,230,.5);
+
+    box-shadow:
+        0 0 25px rgba(255,70,170,.45),
+        0 0 70px rgba(255,70,170,.2);
+
+    backdrop-filter:blur(18px);
+
+    padding:20px;
+
+    overflow:hidden;
+}
+
+.cardBack{
+    transform:rotateY(180deg);
+    overflow-y:auto;
+}
+
+/* CARD FRONT */
+
+.cardFront{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.cardTitle{
+    font-size:30px;
+    color:#ffd5e7;
+    text-align:center;
+    margin-bottom:15px;
+}
+
+.cardSub{
+    text-align:center;
+    color:#ffc2dc;
+    margin-bottom:15px;
+}
+
+.photoGrid{
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.photo{
+    background:white;
+    padding:7px;
+    border-radius:8px;
+    box-shadow:0 5px 18px rgba(0,0,0,.35);
+}
+
+.photo img{
+    display:block;
+    width:100%;
+    height:190px;
+    object-fit:contain;
+    background:#f4e7ee;
+    border-radius:3px;
+}
+
+.memoryText{
+    margin-top:20px;
+    text-align:center;
+    color:#ffe7f1;
+    font-size:17px;
+    line-height:1.6;
+}
+
+/* CARD BACK */
+
+.backTitle{
+    text-align:center;
+    font-size:28px;
+    color:#ffd5e8;
+    margin-bottom:18px;
+}
+
+.letter{
+    font-family:"Segoe UI",Arial,sans-serif;
+    font-size:15.5px;
+    line-height:1.65;
+    color:#fff0f6;
+}
+
+.letter strong{
+    color:#ffd1e6;
+}
+
+.signature{
+    margin-top:20px;
+    text-align:right;
+    font-family:Georgia,serif;
+    font-size:18px;
+    color:#ffd0e5;
+}
+
+/* FLIP INSTRUCTION */
+
+.flipHint{
+    margin-top:18px;
+    color:#ffc1dc;
+    text-align:center;
+    font-size:14px;
+    letter-spacing:1px;
+    animation:hint 1.5s infinite;
+}
+
+@keyframes hint{
+    50%{
+        transform:translateY(-5px);
+    }
+}
+
+/* EXTRA PHOTOS AFTER FIRST FLIP */
+
+.photoPage{
+    margin-top:18px;
+}
+
+.photoPage .photo img{
+    height:175px;
+}
+
+/* FINAL */
+
+.finalTitle{
+    text-align:center;
+    font-size:clamp(38px,9vw,80px);
+    color:#ffd4e8;
+    text-shadow:
+        0 0 15px #ff78b9,
+        0 0 45px #ff45a3;
+    animation:finalPulse 1.5s infinite;
+}
+
+@keyframes finalPulse{
+    50%{
+        transform:scale(1.04);
+    }
+}
+
+.finalText{
+    margin-top:25px;
+    text-align:center;
+    font-size:25px;
+    line-height:1.7;
+    color:#ffeaf3;
+}
+
+/* CONFETTI */
+
+.confetti{
+    position:fixed;
+    top:-20px;
+    width:8px;
+    height:15px;
+    z-index:50;
+    animation:fall linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+    }
+}
+
+@media(max-width:500px){
+
+    .flipArea{
+        height:73vh;
+    }
+
+    .cardFace{
+        padding:15px;
+    }
+
+    .photo img{
+        height:150px;
+    }
+
+    .photoPage .photo img{
+        height:145px;
+    }
+
+    .letter{
+        font-size:14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="hearts"></div>
+
+
+<!-- INTRO -->
+
+<section class="screen active" id="s1">
+
+    <div class="small">
+        A little surprise for you
+    </div>
+
+    <h1 class="title">
+        Hey Priya Didi ❤️
+    </h1>
+
+    <p class="subtitle">
+        Something special has been waiting for you...
+    </p>
+
+    <button class="btn" onclick="go(2)">
+        LET'S GO ❤️
+    </button>
+
+</section>
+
+
+<!-- STORY -->
+
+<section class="screen" id="s2">
+
+    <div class="story">
+
+        <span>Today isn't just another day...</span>
+
+        <span>
+            It's the celebration of someone truly special...
+        </span>
+
+        <span>
+            Someone who makes every moment brighter...
+        </span>
+
+        <span>
+            And that someone is YOU, Priya Didi. ❤️
+        </span>
+
+    </div>
+
+    <button class="btn" onclick="go(3)">
+        Continue ✨
+    </button>
+
+</section>
+
+
+<!-- CALENDAR -->
+
+<section class="screen" id="s3">
+
+    <div class="small">
+        Save this date ❤️
+    </div>
+
+    <div class="calendar">
+
+        <div class="month">
+            September 2026
+        </div>
+
+        <div class="weekdays">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+        </div>
+
+        <div class="days">
+
+            <div></div>
+            <div></div>
+
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+
+            <div>6</div>
+            <div>7</div>
+
+            <div class="special">
+                8
+            </div>
+
+            <div>9</div>
+            <div>10</div>
+            <div>11</div>
+            <div>12</div>
+
+            <div>13</div>
+            <div>14</div>
+            <div>15</div>
+            <div>16</div>
+            <div>17</div>
+            <div>18</div>
+            <div>19</div>
+
+            <div>20</div>
+            <div>21</div>
+            <div>22</div>
+            <div>23</div>
+            <div>24</div>
+            <div>25</div>
+            <div>26</div>
+
+            <div>27</div>
+            <div>28</div>
+            <div>29</div>
+            <div>30</div>
+
+        </div>
+
+        <div class="calendarMsg">
+            ♥ 8 September — A Very Special Day ♥
+        </div>
+
+    </div>
+
+    <button class="btn" onclick="go(4)">
+        See the surprise ✨
+    </button>
+
+</section>
+
+
+<!-- AGE -->
+
+<section class="screen" id="s4">
+
+    <div class="small">
+        A beautiful journey
+    </div>
+
+    <div class="age">
+        20
+    </div>
+
+    <div class="ageText">
+        20 years ago, a beautiful soul entered this world...
+        <br><br>
+        And that someone is YOU, Priya Didi. ✨
+    </div>
+
+    <button class="btn" onclick="go(5)">
+        Open Your Birthday Card 💌
+    </button>
+
+</section>
+
+
+<!-- FLIP CARD -->
+
+<section class="screen" id="s5">
+
+    <div class="small">
+        A special card for you ❤️
+    </div>
+
+    <div class="flipArea">
+
+        <div class="flipCard" id="flipCard"
+             onclick="flipCard()">
+
+            <!-- FRONT -->
+
+            <div class="cardFace cardFront">
+
+                <div class="cardTitle">
+                    Priya Didi ❤️
+                </div>
+
+                <div class="cardSub">
+                    Beautiful memories ✨
+                </div>
+
+                <div class="photoGrid">
+
+                    <!-- PHOTO 1 -->
+
+                    <div class="photo">
+                        <img src="1.jpeg">
+                    </div>
+
+                    <!-- PHOTO 2 -->
+
+                    <div class="photo">
+                        <img src="2.jpeg">
+                    </div>
+
+                    <!-- PHOTO 3 -->
+
+                    <div class="photo">
+                        <img src="3.jpeg">
+                    </div>
+
+                    <!-- PHOTO 4 -->
+
+                    <div class="photo">
+                        <img src="4.jpeg">
+                    </div>
+
+                </div>
+
+                <div class="memoryText">
+
+                    Four memories...
+                    countless reasons to smile. 🥹❤️
+
+                    <br><br>
+
+                    Tap the card to open your surprise 💌
+
+                </div>
+
+            </div>
+
+
+            <!-- BACK -->
+
+            <div class="cardFace cardBack">
+
+                <div class="backTitle">
+                    Happy Birthday, Didi 🎂❤️
+                </div>
+
+                <div class="photoGrid photoPage">
+
+                    <!-- PHOTO 6 -->
+
+                    <div class="photo">
+                        <img src="6.jpeg">
+                    </div>
+
+                    <!-- PHOTO 7 -->
+
+                    <div class="photo">
+                        <img src="7.jpeg">
+                    </div>
+
+                    <!-- PHOTO 9 -->
+
+                    <div class="photo">
+                        <img src="9.jpeg">
+                    </div>
+
+                    <!-- PHOTO 5 -->
+
+                    <div class="photo">
+                        <img src="5.jpeg">
+                    </div>
+
+                </div>
+
+                <br>
+
+                <div class="letter">
+
+                    <strong>
+                        Happy Birthday, Priya Didi! 🎂❤️
+                    </strong>
+
+                    <br><br>
+
+                    Today is all about celebrating the beautiful
+                    person you are. You bring so much happiness,
+                    warmth and positivity wherever you go.
+
+                    <br><br>
+
+                    I'm truly lucky to have you as my sister.
+                    No matter how much we tease each other or
+                    have silly moments, you'll always be someone
+                    very special to me.
+
+                    <br><br>
+
+                    May your 20th year bring you lots of happiness,
+                    success, unforgettable memories and countless
+                    reasons to smile.
+
+                    <br><br>
+
+                    Keep smiling, keep shining, and always stay
+                    the amazing person you are.
+
+                    <br><br>
+
+                    <strong>
+                        Happy 20th Birthday, Priya Didi! 🥳🎈❤️
+                    </strong>
+
+                    <br><br>
+
+                    Enjoy your special day!
+
+                    <div class="signature">
+
+                        With lots of love ❤️
+                        <br>
+                        Your Brother
+                        <br>
+                        <strong>
+                            OM ❤️‍🩹🌷
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="flipHint">
+        👆 Tap the card to flip
+    </div>
+
+    <button class="btn" onclick="go(6)">
+        Celebrate 🎉
+    </button>
+
+</section>
+
+
+<!-- FINAL -->
+
+<section class="screen" id="s6">
+
+    <div class="small">
+        Today is your day ❤️
+    </div>
+
+    <h1 class="finalTitle">
+        HAPPY BIRTHDAY<br>
+        PRIYA DIDI ❤️
+    </h1>
+
+    <div class="finalText">
+
+        20 & AMAZING ✨
+
+        <br><br>
+
+        Enjoy Your Day, Didi ❤️
+
+        <br>
+
+        Keep Smiling. Keep Shining. 🌸
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* SCREEN CHANGE */
+
+function go(number){
+
+    document.querySelectorAll(".screen")
+    .forEach(s => s.classList.remove("active"));
+
+    document.getElementById("s"+number)
+    .classList.add("active");
+
+    if(number === 6){
+        confetti();
+    }
+}
+
+
+/* FLIP CARD */
+
+function flipCard(){
+
+    const card =
+        document.getElementById("flipCard");
+
+    card.classList.toggle("flipped");
+
+}
+
+
+/* FLOATING HEARTS */
+
+const hearts =
+    document.getElementById("hearts");
+
+function makeHeart(){
+
+    const h =
+        document.createElement("div");
+
+    h.className = "heart";
+
+    h.innerHTML =
+        Math.random() > .5 ? "♥" : "♡";
+
+    h.style.left =
+        Math.random()*100 + "vw";
+
+    h.style.fontSize =
+        (12 + Math.random()*25) + "px";
+
+    h.style.animationDuration =
+        (7 + Math.random()*8) + "s";
+
+    hearts.appendChild(h);
+
+    setTimeout(()=>{
+        h.remove();
+    },16000);
+}
+
+setInterval(makeHeart,450);
+
+for(let i=0;i<20;i++){
+    makeHeart();
+}
+
+
+/* CONFETTI */
+
+function confetti(){
+
+    for(let i=0;i<150;i++){
+
+        const c =
+            document.createElement("div");
+
+        c.className = "confetti";
+
+        c.style.left =
+            Math.random()*100 + "vw";
+
+        c.style.animationDuration =
+            (3 + Math.random()*4) + "s";
+
+        c.style.animationDelay =
+            Math.random()*2 + "s";
+
+        c.style.background =
+            [
+                "#ff77b8",
+                "#ffd0e5",
+                "#ffffff",
+                "#ffb0d5",
+                "#e5a7ff"
+            ][Math.floor(Math.random()*5)];
+
+        document.body.appendChild(c);
+
+        setTimeout(()=>{
+            c.remove();
+        },8000);
+    }
+
+    for(let i=0;i<35;i++){
+        setTimeout(makeHeart,i*100);
+    }
+}
+
+</script>
+
+</body>
+</html>
